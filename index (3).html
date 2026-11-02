@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parcours de formation – Chasse au trésor – France Travail Guadeloupe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="ft-header">France Travail</div>
+<div class="header">
+  <h1 class="title"><i class="fa-solid fa-compass"></i>Parcours de formation</h1>
+  <p class="sub">La chasse au trésor · Guadeloupe</p>
+</div>
+
+<div id="decor"></div>
+
+<main class="container">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="kicker"><i class="fa-solid fa-graduation-cap"></i> Parcours de formation</span>
+      <h2 class="title">Karukera t'ouvre ses portes, chasseur de trésors&nbsp;!</h2>
+      <p>
+        L'équipe <strong>France Travail Guadeloupe</strong> t'invite à une <strong>chasse aux organismes de formation</strong>
+        en Grande-Terre&nbsp;: pars à leur rencontre pour découvrir les formations qui t'attendent.
+      </p>
+      <p>
+        <strong>Un organisme = un CV déposé = une énigme résolue.</strong>
+        Valorise ton profil, échange avec les équipes et trouve la formation qui te correspond.
+      </p>
+      <p id="rv" class="rv-line" hidden></p>
+    </div>
+
+    <div class="frame" id="heroFrame">
+      <div class="ph"><i class="fa-solid fa-umbrella-beach"></i><span>Karukera · l'île aux belles eaux</span></div>
+      <img id="heroImg" alt="La Guadeloupe" src="media/accueil.jpg" onerror="this.remove()">
+      <video id="heroVideo" autoplay muted loop playsinline preload="metadata" hidden>
+        <source src="media/guadeloupe.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <!-- COMMENT ÇA MARCHE -->
+  <h2 class="section-title title"><i class="fa-solid fa-scroll"></i>Comment ça marche&nbsp;?</h2>
+  <section class="steps-grid">
+    <div class="how"><span class="num">1</span><i class="fa-solid fa-flag"></i><h3>Rendez-vous au point de ralliement</h3><p>Retrouve ton équipe et ton conseiller France Travail pour le départ.</p></div>
+    <div class="how"><span class="num">2</span><i class="fa-solid fa-mobile-screen-button"></i><h3>Connecte-toi</h3><p>Lance la chasse depuis ton téléphone grâce au bouton ci-dessous.</p></div>
+    <div class="how"><span class="num">3</span><i class="fa-solid fa-map-location-dot"></i><h3>Pars à la chasse</h3><p>Rends-toi dans chaque organisme de formation et dépose ton CV pour obtenir la réponse à l'énigme.</p></div>
+    <div class="how"><span class="num">4</span><i class="fa-solid fa-gem"></i><h3>Trouve le trésor</h3><p>Valide toutes les énigmes dans le temps imparti&nbsp;: 90 minutes chrono&nbsp;!</p></div>
+  </section>
+
+  <!-- PARCOURS -->
+  <h2 class="section-title title"><i class="fa-solid fa-ship"></i>Prêt à partir&nbsp;?</h2>
+  <section class="cards" style="grid-template-columns:minmax(300px,520px);justify-content:center">
+    <a class="card" id="card1" href="parcours.html">
+      <span class="ribbon">Grande-Terre</span>
+      <h2 class="title">Le parcours de formation</h2>
+      <div class="meta"><span><i class="fa-solid fa-location-dot"></i> 4 organismes de formation</span><span><i class="fa-solid fa-clock"></i> 90 min</span></div>
+      <span class="go"><i class="fa-solid fa-anchor"></i> Lever l'ancre</span>
+    </a>
+  </section>
+
+  <!-- GALERIE (visible seulement si des photos sont fournies) -->
+  <div id="galleryWrap" hidden>
+    <h2 class="section-title title"><i class="fa-solid fa-camera"></i>La Guadeloupe en images</h2>
+    <section class="gallery" id="gallery"></section>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="actions">
+    <a href="https://www.francetravail.fr/accueil/" class="btn btn-ft" target="_blank" rel="noopener">
+      <i class="fa-solid fa-briefcase"></i> Voir les offres France Travail
+    </a>
+    <a href="https://immersion-facile.beta.gouv.fr/" class="btn btn-immersion" target="_blank" rel="noopener">
+      <i class="fa-solid fa-users"></i> Découvrir les immersions facilitées
+    </a>
+    <a href="questionnaire.html" class="btn btn-satisfaction">
+      <i class="fa-solid fa-comment-dots"></i> Donner mon avis
+    </a>
+  </div>
+
+</main>
+
+<div class="footer">© France Travail – Parcours de formation | Dites le nous une fois</div>
+
+<script src="data.js"></script>
+<script src="common.js"></script>
+<script>
+/* Vidéo d'ambiance : déposer media/guadeloupe.mp4 pour l'activer */
+const v = document.getElementById("heroVideo");
+v.addEventListener("loadeddata", () => { v.hidden = false; v.play().catch(() => {}); });
+v.load();
+
+/* Photo de fond de la carte parcours (media/accueil.jpg si présente) */
+const bg = new Image();
+bg.onload = () => { document.getElementById("card1").style.backgroundImage = "url('media/accueil.jpg')"; };
+bg.src = "media/accueil.jpg";
+
+/* Point de ralliement (optionnel, voir data.js) */
+if (RALLIEMENT) {
+  const rv = document.getElementById("rv");
+  rv.hidden = false;
+  rv.innerHTML = '<i class="fa-solid fa-flag" style="color:#ea6367"></i> <strong>Point de ralliement :</strong> ' + RALLIEMENT;
+}
+
+/* Galerie : media/galerie-1.jpg à galerie-3.jpg (les absentes sont ignorées) */
+[1, 2, 3].forEach(n => {
+  const img = new Image();
+  img.onload = () => {
+    document.getElementById("galleryWrap").hidden = false;
+    document.getElementById("gallery").insertAdjacentHTML("beforeend",
+      '<figure><img loading="lazy" alt="La Guadeloupe" src="' + img.src + '"></figure>');
+  };
+  img.src = "media/galerie-" + n + ".jpg";
+});
+</script>
+</body>
+</html>
